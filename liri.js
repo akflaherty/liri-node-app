@@ -65,9 +65,13 @@ function tweetFunc() {
 }
 
 function spotifyFunc(val) {
+    // default value
+    if (!val) {
+        val = 'All the Small Things';
+    }
     spotify.search({
         type: 'track',
-        query: 'All the Small Things'
+        query: val
     }, function(err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
