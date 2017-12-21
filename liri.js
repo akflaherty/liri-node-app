@@ -11,13 +11,21 @@ var client = new Twitter({
     access_token_secret: 'C9PKXuqP9HYMTd4LLfSGFyh0ydEinVXgopoa1ipFPCUje'
 });
 
+// spotify npm
+var Spotify = require('node-spotify-api');
+
+var spotify = new Spotify({
+    id: '38939a5298534c479ebb601a50454b05',
+    secret: '38cda4cf33d94335837159711b544fd7'
+});
+
 var tab = '    '; // added to improve format
 
 // take user's inputs
 var command = process.argv[2];
 var input = process.argv[3];
 
-// construct a single input
+// construct a single input string if needed
 for (var i = 4; i < process.argv.length; i++) {
     input = input + ' ' + process.argv[i];
 }
@@ -41,7 +49,7 @@ switch (command) {
         whatItSaysFunc();
 
     default:
-        console.log('ERROR: unrecognized command');
+        console.log('ERROR: command not recognized');
 }
 
 function tweetFunc() {
@@ -69,15 +77,6 @@ function spotifyFunc(val) {
         val = 'All the Small Things';
     }
 
-    // spotify npm
-    var Spotify = require('node-spotify-api');
-
-    var spotify = new Spotify({
-        id: '38939a5298534c479ebb601a50454b05',
-        secret: '38cda4cf33d94335837159711b544fd7'
-    });
-
-
     spotify.search({
         type: 'track',
         query: val
@@ -85,9 +84,9 @@ function spotifyFunc(val) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-        var track = data.tracks.items[0]
-            // log data
-            // Artist(s)
+        var track = data.tracks.items[0];
+        // log data
+        // Artist(s)
         console.log('Artist: ', track.artists[0].name);
         // The song's name
         console.log('Name: ', track.name);
