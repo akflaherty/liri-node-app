@@ -19,7 +19,7 @@ var spotify = new Spotify({
     secret: '38cda4cf33d94335837159711b544fd7'
 });
 
-var tab = '    '; // added to improve format
+var tab = '    '; // added to improve formatting
 
 // take user's inputs
 var command = process.argv[2];
@@ -45,11 +45,11 @@ switch (command) {
         break
 
     case 'do-what-it-says':
-        console.log('what it says');
+        // console.log('what it says');
         whatItSaysFunc();
-
+        break
     default:
-        console.log('ERROR: command not recognized');
+        console.log('ERROR - command not recognized:', command);
 }
 
 function tweetFunc() {
