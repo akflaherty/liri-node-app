@@ -31,29 +31,33 @@ for (var i = 4; i < process.argv.length; i++) {
 }
 
 console.log('');
-switch (command) {
-    case 'my-tweets':
-        tweetFunc();
-        break
 
-    case 'spotify-this-song':
-        spotifyFunc(input);
-        break
+checkInput(command);
 
-    case 'movie-this':
-        movieFunc(input);
-        break
+function checkInput(command) {
+    switch (command) {
+        case 'my-tweets':
+            tweetFunc();
+            break
 
-    case 'do-what-it-says':
-        // console.log('what it says');
-        whatItSaysFunc();
-        break
-    default:
-        console.log('ERROR - command not recognized:', command);
+        case 'spotify-this-song':
+            spotifyFunc(input);
+            break
+
+        case 'movie-this':
+            movieFunc(input);
+            break
+
+        case 'do-what-it-says':
+            // console.log('what it says');
+            whatItSaysFunc();
+            break
+        default:
+            console.log('ERROR - command not recognized:', command);
+    }
 }
 
 function tweetFunc() {
-    // console.log('tweet function');
     var params = {
         screen_name: 'wasabi_badger'
     };
@@ -102,7 +106,6 @@ function movieFunc(val) {
         // default value
         val = 'Mr.+Nobody';
     }
-    // console.log('movie function', val);
     var queryUrl = "http://www.omdbapi.com/?t=" + val + "&y=&plot=short&apikey=40e9cece";
 
     request(queryUrl, function(error, response, body) {
@@ -134,18 +137,18 @@ function movieFunc(val) {
             // * Plot of the movie.
             console.log('Plot: ');
             console.log(tab + data.Plot);
-
         }
     })
 }
 
 function whatItSaysFunc() {
-    // console.log('doing what it says');
     var fs = require('fs');
     fs.readFile('random.txt', 'utf-8', function(error, data) {
-        if (error){
+        if (error) {
             return console.log(error);
         }
-        console.log(data);
+        var fileData = data.split(',');
+        input = fileData[1];
+        checkInput(fileData[0]);
     })
 }
