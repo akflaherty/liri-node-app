@@ -140,5 +140,12 @@ function movieFunc(val) {
 }
 
 function whatItSaysFunc() {
-    console.log('doing what it says');
+    // console.log('doing what it says');
+    var fs = require('fs');
+    fs.readFile('random.txt', 'utf-8', function(error, data) {
+        if (error){
+            return console.log(error);
+        }
+        console.log(data);
+    })
 }
