@@ -34,8 +34,8 @@ console.log('');
 
 checkInput(command);
 
-function checkInput(command) {
-    switch (command) {
+function checkInput(userCommand) {
+    switch (userCommand) {
         case 'my-tweets':
             tweetFunc();
             break
